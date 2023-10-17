@@ -10,7 +10,7 @@ namespace SimpleSheduler
         {
             string logFilePath = Environment.CurrentDirectory + "\\Info.log";
             Log.Logger = new LoggerConfiguration().WriteTo.File(logFilePath).CreateLogger();
-            Log.Logger.Information("Program started at " + DateTime.Now);
+            Log.Information("Program started at " + DateTime.Now);
             InitializeComponent();
         }
 
@@ -27,10 +27,11 @@ namespace SimpleSheduler
             }
             catch (Exception ex)
             {
-                Log.Logger.Fatal(ex.ToString() + "\n\n" + ex.Message + "\n\n" + ex.StackTrace);
-                Log.Logger.Fatal(DateTime.Now + " Exiting program...");
+                Log.Fatal(ex.ToString() + "\n\n" + ex.Message + "\n\n" + ex.StackTrace);
+                Log.Fatal("Exiting program...");
                 Environment.Exit(2);
             }
+
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
