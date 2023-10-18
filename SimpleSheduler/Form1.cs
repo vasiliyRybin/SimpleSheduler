@@ -8,8 +8,7 @@ namespace SimpleSheduler
     {
         public MainForm()
         {
-            string logFilePath = Environment.CurrentDirectory + "\\Info.log";
-            Log.Logger = new LoggerConfiguration().WriteTo.File(logFilePath).CreateLogger();
+            Log.Logger = new LoggerConfiguration().WriteTo.File(GlobalVariables.logFilePath).CreateLogger();
             Log.Information("Program started at " + DateTime.Now);
             InitializeComponent();
         }
@@ -18,10 +17,11 @@ namespace SimpleSheduler
         {
             try
             {
-                bool DB_Exists = QueriesAndMaintainanceClass.CheckIfDBExists();
+                string test = QueriesStorage.SelectAllQuery.Substring(QueriesStorage.SelectAllQuery.Trim().ToLower().IndexOf(" "), QueriesStorage.SelectAllQuery.ToLower().IndexOf(" FROM"));
+                bool DB_Exists = MaintainanceClass.CheckIfDBExists();
                 if (!DB_Exists)
                 {
-                    var succesfullyCreated = QueriesAndMaintainanceClass.CreateDBAndTable_MissingDB();
+                    var succesfullyCreated = MaintainanceClass.CreateDBAndTable_MissingDB();
                     if (!succesfullyCreated) Log.Information("Main table been not created, check the DB connection");
                 }
             }

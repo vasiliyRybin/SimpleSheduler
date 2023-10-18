@@ -89,7 +89,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueriesAndMaintainanceClass.cs" />
+    <Compile Include="MaintainanceClass.cs" />
+    <Compile Include="GlobalVariables.cs" />
+    <Compile Include="QueriesStorage.cs" />
+    <Compile Include="SheduledTask.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
