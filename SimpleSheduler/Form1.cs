@@ -17,7 +17,6 @@ namespace SimpleSheduler
         {
             try
             {
-                string test = QueriesStorage.SelectAllQuery.Substring(QueriesStorage.SelectAllQuery.Trim().ToLower().IndexOf(" "), QueriesStorage.SelectAllQuery.ToLower().IndexOf(" FROM"));
                 bool DB_Exists = MaintainanceClass.CheckIfDBExists();
                 if (!DB_Exists)
                 {
