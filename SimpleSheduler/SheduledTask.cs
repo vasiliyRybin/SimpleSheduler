@@ -4,13 +4,13 @@ namespace SimpleSheduler
 {
     public sealed class SheduledTask
     {
-        public int TaskID { get; }
-        public string TaskName { get; }
-        public string TaskDescription { get; }
-        public bool IsFinished { get; }
-        public bool IsInProcess { get; }
-        public DateTime CreatedDate { get; }
-        public DateTime ChangedDate { get; }
+        public int TaskID { get; set; }
+        public string TaskName { get; set; }
+        public string TaskDescription { get; set; }
+        public bool IsFinished { get; set; }
+        public bool IsInProcess { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime ChangedDate { get; set; }
 
 
         public SheduledTask(int taskId = 0,
