@@ -25,10 +25,10 @@ namespace SimpleSheduler
         {
             var taskList = QueryDB_SelectStatement_ReturnListWithDictionary(QueriesStorage.SelectAllQuery);
             
-            if (taskList == null)
+            if (taskList.Count == 0)
             {
                 Log.Warning("Empty task list!!!");
-                return null;
+                return new List<SheduledTask>();
 
             }
 
@@ -36,7 +36,7 @@ namespace SimpleSheduler
             if (check.Count != 0)
             {
                 Log.Warning("One of the tasks contains wrong values. Wrong values is: " + string.Join(", ", check));
-                return null;
+                return new List<SheduledTask>();
             }
 
             List<SheduledTask> tasks = new List<SheduledTask>();
@@ -91,7 +91,7 @@ namespace SimpleSheduler
                 }
             }
 
-            return DBObjects_List.Count > 0 ? DBObjects_List : null;
+            return DBObjects_List;
         }
     }
 }
