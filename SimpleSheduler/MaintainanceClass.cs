@@ -21,14 +21,14 @@ namespace SimpleSheduler
             return dataInserted;
         }
 
-        public static void GetAllTasks_ToList()
+        public static List<SheduledTask> GetAllTasks_ToList()
         {
             var taskList = QueryDB_SelectStatement_ReturnListWithDictionary(QueriesStorage.SelectAllQuery);
             
             if (taskList == null)
             {
                 Log.Warning("Empty task list!!!");
-                return;
+                return null;
 
             }
 
@@ -36,7 +36,7 @@ namespace SimpleSheduler
             if (check.Count != 0)
             {
                 Log.Warning("One of the tasks contains wrong values. Wrong values is: " + string.Join(", ", check));
-                return;
+                return null;
             }
 
             List<SheduledTask> tasks = new List<SheduledTask>();
@@ -53,6 +53,8 @@ namespace SimpleSheduler
                 var parsedTask = new SheduledTask(taskID, taskName, taskDesc, isFinished, isInProcess, createdDate, changedDate);
                 tasks.Add(parsedTask);
             }
+
+            return tasks;
         }
 
         private static int QueryDB_NonSelectStatement(string QueryString)

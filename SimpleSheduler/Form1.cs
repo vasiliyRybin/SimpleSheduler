@@ -27,7 +27,9 @@ namespace SimpleSheduler
                     if (!succesfullyCreated) Log.Information("Main table been not created, check the DB connection");
                 }
 
-                MaintainanceClass.GetAllTasks_ToList();
+                var tasks = MaintainanceClass.GetAllTasks_ToList();
+                if (tasks.Count == 0) MessageBox.Show("Something went wrong during getting tasks list. Please check log");
+
             }
             catch (Exception ex)
             {
