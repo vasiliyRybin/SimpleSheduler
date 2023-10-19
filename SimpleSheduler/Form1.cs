@@ -1,8 +1,5 @@
 ﻿using Serilog;
 using System;
-using System.Collections.Generic;
-using System.Data.SQLite;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SimpleSheduler
@@ -19,7 +16,7 @@ namespace SimpleSheduler
         private void MainForm_Load(object sender, EventArgs e)
         {
             try
-            {                
+            {
                 bool DB_Exists = MaintainanceClass.CheckIfDBExists();
                 if (!DB_Exists)
                 {

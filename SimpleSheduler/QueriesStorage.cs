@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SimpleSheduler
+﻿namespace SimpleSheduler
 {
     public static class QueriesStorage
     {
-        public const string CreateMainTableQuery =  "CREATE TABLE TaskList (\r\n " +
+        public const string CreateMainTableQuery = "CREATE TABLE TaskList (\r\n " +
                                                     "TaskID          INTEGER   PRIMARY KEY ASC AUTOINCREMENT\r\n  NOT NULL\r\n UNIQUE\r\n DEFAULT (1),\r\n " +
                                                     "TaskName        TEXT (50) NOT NULL\r\n  DEFAULT ('New Task'),\r\n    " +
                                                     "TaskDescription TEXT,\r\n " +

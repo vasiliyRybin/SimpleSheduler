@@ -13,7 +13,7 @@ namespace SimpleSheduler
             return File.Exists(Environment.CurrentDirectory + "\\Sheduler");
         }
         public static bool CreateDBAndTable_MissingDB()
-        {            
+        {
             SQLiteConnection.CreateFile(GlobalVariables.dbPath);
 
             QueryDB_NonSelectStatement(QueriesStorage.CreateMainTableQuery);
@@ -24,11 +24,11 @@ namespace SimpleSheduler
         public static List<SheduledTask> GetAllTasks_ToList()
         {
             var taskList = QueryDB_SelectStatement_ReturnListWithDictionary(QueriesStorage.SelectAllQuery);
-            
+
             if (taskList == null || taskList.Count == 0)
             {
                 Log.Warning("Empty task list!!!");
-                return null;
+                return new List<SheduledTask>();
 
             }
 
@@ -36,11 +36,11 @@ namespace SimpleSheduler
             if (check.Count != 0)
             {
                 Log.Warning("One of the tasks contains wrong values. Wrong values is: " + string.Join(", ", check));
-                return null;
+                return new List<SheduledTask>();
             }
 
             List<SheduledTask> tasks = new List<SheduledTask>();
-            foreach (var task in taskList) 
+            foreach (var task in taskList)
             {
                 var taskID = Convert.ToInt32(task["TaskID"]);
                 var taskName = task["TaskName"];
@@ -49,7 +49,7 @@ namespace SimpleSheduler
                 var isInProcess = Convert.ToBoolean(task["IsInProcess"] == "1");
                 var createdDate = DateTime.Parse(task["CreatedDate"]);
                 var changedDate = string.IsNullOrWhiteSpace(task["ChangedDate"]) ? new DateTime() : DateTime.Parse(task["ChangedDate"]);
-                
+
                 var parsedTask = new SheduledTask(taskID, taskName, taskDesc, isFinished, isInProcess, createdDate, changedDate);
                 tasks.Add(parsedTask);
             }

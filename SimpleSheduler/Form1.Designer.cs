@@ -62,25 +62,27 @@
             // 
             // ID
             // 
+            this.ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.ID.HeaderText = "№";
             this.ID.MinimumWidth = 8;
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
-            this.ID.Width = 150;
+            this.ID.Width = 60;
             // 
             // TaskName
             // 
+            this.TaskName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.TaskName.HeaderText = "Task Name";
             this.TaskName.MinimumWidth = 8;
             this.TaskName.Name = "TaskName";
-            this.TaskName.Width = 150;
+            this.TaskName.Width = 125;
             // 
             // TaskDescription
             // 
+            this.TaskDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.TaskDescription.HeaderText = "Description";
             this.TaskDescription.MinimumWidth = 8;
             this.TaskDescription.Name = "TaskDescription";
-            this.TaskDescription.Width = 150;
             // 
             // IsFinished
             // 
