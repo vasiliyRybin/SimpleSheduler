@@ -30,6 +30,19 @@ namespace SimpleSheduler
                 var tasks = MaintainanceClass.GetAllTasks_ToList();
                 if (tasks.Count == 0) MessageBox.Show("Something went wrong during getting tasks list. Please check log");
 
+                TaskDataView.Rows.Clear();
+
+                foreach (var item in tasks)
+                {
+                    int rowIdx = TaskDataView.Rows.Add();
+                    TaskDataView.Rows[rowIdx].Cells["ID"].Value = item.TaskID;
+                    TaskDataView.Rows[rowIdx].Cells["TaskName"].Value = item.TaskName;
+                    TaskDataView.Rows[rowIdx].Cells["TaskDescription"].Value = item.TaskDescription;
+                    TaskDataView.Rows[rowIdx].Cells["IsFinished"].Value = item.IsFinished;
+                    TaskDataView.Rows[rowIdx].Cells["IsInProgress"].Value = item.IsInProcess;
+                    TaskDataView.Rows[rowIdx].Cells["CreatedDate"].Value = item.CreatedDate;
+                    TaskDataView.Rows[rowIdx].Cells["ChangedDate"].Value = item.ChangedDate == new DateTime() ? "" : item.ChangedDate.ToString();
+                }
             }
             catch (Exception ex)
             {

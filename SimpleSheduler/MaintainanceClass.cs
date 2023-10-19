@@ -25,7 +25,7 @@ namespace SimpleSheduler
         {
             var taskList = QueryDB_SelectStatement_ReturnListWithDictionary(QueriesStorage.SelectAllQuery);
             
-            if (taskList == null)
+            if (taskList == null || taskList.Count == 0)
             {
                 Log.Warning("Empty task list!!!");
                 return null;
@@ -91,7 +91,7 @@ namespace SimpleSheduler
                 }
             }
 
-            return DBObjects_List.Count > 0 ? DBObjects_List : null;
+            return DBObjects_List;
         }
     }
 }
