@@ -93,6 +93,7 @@
     <Compile Include="GlobalVariables.cs" />
     <Compile Include="QueriesStorage.cs" />
     <Compile Include="SheduledTask.cs" />
+    <Compile Include="Validators.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

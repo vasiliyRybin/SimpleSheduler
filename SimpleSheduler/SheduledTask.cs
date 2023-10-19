@@ -17,7 +17,13 @@ namespace SimpleSheduler
         public DateTime ChangedDate { get; set; }
 
 
-        public SheduledTask(int taskId, string taskName, string taskDescription, bool isFinished, bool isInProcess, DateTime createdDt, DateTime changedDt) 
+        public SheduledTask(int taskId = 0, 
+                            string taskName = "", 
+                            string taskDescription = "", 
+                            bool isFinished = false, 
+                            bool isInProcess = false, 
+                            DateTime createdDt = new DateTime(), 
+                            DateTime changedDt = new DateTime()) 
         {
             TaskID = taskId;
             TaskName = taskName;

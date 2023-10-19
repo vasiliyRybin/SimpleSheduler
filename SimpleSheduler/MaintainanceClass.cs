@@ -23,7 +23,17 @@ namespace SimpleSheduler
 
         public static void GetAllDataFromMainTable()
         {
-            QueryDB_NonSelectStatement(QueriesStorage.SelectAllQuery);
+            var taskList = QueryDB_SelectStatement_ReturnListObject(QueriesStorage.SelectAllQuery);
+            
+            if (taskList != null)
+            {
+
+            }
+            else
+            {
+                Log.Warning("Empty task list!!!");
+                return;
+            }
         }
 
         private static int QueryDB_NonSelectStatement(string QueryString)
@@ -36,19 +46,31 @@ namespace SimpleSheduler
             }
         }
 
-        //TODO
-        private static List<object> QueryDB_SelectStatement_ReturnListObject(string QueryString)
+        private static List<Dictionary<string, string>> QueryDB_SelectStatement_ReturnListObject(string QueryString)
         {
-            object item = new object();
-            List<object> list = new List<object>();
-
+            List<Dictionary<string, string>> DBObjects_List = new List<Dictionary<string, string>>();
+            Dictionary<string, string> DBObject;
             using (var sqlite = new SQLiteConnection($"Data Source={GlobalVariables.dbPath}"))
             {
                 sqlite.Open();
                 SQLiteCommand command = new SQLiteCommand(QueryString, sqlite);
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        DBObject = new Dictionary<string, string>();
+
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            DBObject.Add(reader.GetName(i), reader[i]?.ToString());
+                        }
+
+                        DBObjects_List.Add(DBObject);
+                    }
+                }
             }
 
-            return list;
+            return DBObjects_List.Count > 0 ? DBObjects_List : null;
         }
     }
 }
