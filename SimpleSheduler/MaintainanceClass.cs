@@ -21,18 +21,37 @@ namespace SimpleSheduler
             return dataInserted;
         }
 
-        public static void GetAllDataFromMainTable()
+        public static void GetAllTasks_ToList()
         {
-            var taskList = QueryDB_SelectStatement_ReturnListObject(QueriesStorage.SelectAllQuery);
+            var taskList = QueryDB_SelectStatement_ReturnListWithDictionary(QueriesStorage.SelectAllQuery);
             
-            if (taskList != null)
-            {
-
-            }
-            else
+            if (taskList == null)
             {
                 Log.Warning("Empty task list!!!");
                 return;
+
+            }
+
+            var check = Validators.Validate_SheduledTaskList(taskList);
+            if (check.Count != 0)
+            {
+                Log.Warning("One of the tasks contains wrong values. Wrong values is: " + string.Join(", ", check));
+                return;
+            }
+
+            List<SheduledTask> tasks = new List<SheduledTask>();
+            foreach (var task in taskList) 
+            {
+                var taskID = Convert.ToInt32(task["TaskID"]);
+                var taskName = task["TaskName"];
+                var taskDesc = task["TaskDescription"];
+                var isFinished = Convert.ToBoolean(task["IsFinished"] == "1");
+                var isInProcess = Convert.ToBoolean(task["IsInProcess"] == "1");
+                var createdDate = DateTime.Parse(task["CreatedDate"]);
+                var changedDate = string.IsNullOrWhiteSpace(task["ChangedDate"]) ? new DateTime() : DateTime.Parse(task["ChangedDate"]);
+                
+                var parsedTask = new SheduledTask(taskID, taskName, taskDesc, isFinished, isInProcess, createdDate, changedDate);
+                tasks.Add(parsedTask);
             }
         }
 
@@ -46,7 +65,7 @@ namespace SimpleSheduler
             }
         }
 
-        private static List<Dictionary<string, string>> QueryDB_SelectStatement_ReturnListObject(string QueryString)
+        private static List<Dictionary<string, string>> QueryDB_SelectStatement_ReturnListWithDictionary(string QueryString)
         {
             List<Dictionary<string, string>> DBObjects_List = new List<Dictionary<string, string>>();
             Dictionary<string, string> DBObject;

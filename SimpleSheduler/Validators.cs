@@ -14,6 +14,7 @@ namespace SimpleSheduler
             HashSet<string> check = new HashSet<string>();
             foreach (var item in taskList)
             {
+                if (check.Count > 0) return check;
                 foreach(var keyValuePair in item)
                 {
                     switch (keyValuePair.Key) 
